@@ -33,7 +33,7 @@
 
     - name: wait until running jobs finish
       ansible.builtin.uri:
-        url: "{{ controller_url}}/api/v2/jobs?execution_node={{ inventory_hostname}},status=running"
+        url: "{{ controller_url}}/api/v2/jobs?execution_node={{ inventory_hostname}}&status=running"
         user: "{{ controller_username }}"
         password: "{{ controller_password }}"
         validate_certs: false
@@ -48,6 +48,7 @@
       ansible.builtin.dnf:
         name: "*"
         state: latest
+        update_cache: yes
       become: true
     
     - name: reboot host
